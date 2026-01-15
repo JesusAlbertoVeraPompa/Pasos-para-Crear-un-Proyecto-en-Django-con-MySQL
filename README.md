@@ -141,6 +141,7 @@ pip-sync requirements/*.txt
 ```
 django-admin startproject config .
 ```
+***
 _Configuración por entornos_
 config/ \
 └── settings/ \
