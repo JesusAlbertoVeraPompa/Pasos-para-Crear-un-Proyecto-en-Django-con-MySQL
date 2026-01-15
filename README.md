@@ -33,6 +33,11 @@ _Creamos la carpeta requirements y agregamos los .in con las Dependencias (Carpe
 ##### ├── dev.in
 ##### └── prod.in
 
+<pre>
+hello, this is
+   just an     example
+....
+</pre>
 ```
 requirements
 ```
