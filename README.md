@@ -21,10 +21,10 @@ pip-compile --version
 ```
 _Creamos la carpeta requirements y agregamos los .in con las Dependencias (Carpeta Principal)_
 ---
-requirements/ \
-├── base.in  \
-├── dev.in  \
-└── prod.in  \
+#### requirements/ \
+#### ├── base.in \
+#### ├── dev.in \
+#### └── prod.in \
 ---
 ```
 requirements
