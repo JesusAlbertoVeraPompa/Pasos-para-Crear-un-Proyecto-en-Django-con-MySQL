@@ -3,15 +3,18 @@
 ### 1.- Creamos a Carpeta donde trabajaremos el Proyecto
 
 ### 2.- Creamos el Entorno Virtual Local en Windows (Carpeta Principal)
+***
 _Importante tener instalado Python 3.12.10 por defecto_
 ```
 python -m venv venv
 ```
 ### 3.- Activamos el Entorno Virtual Local en Windows (Carpeta Principal)
+***
 ```
 venv\Scripts\activate
 ```
 ### 4.- Instalamos el Gestor de Dependencias pip-tools (Carpeta Principal)
+***
 ```
 pip install pip-tools
 ```
@@ -138,11 +141,12 @@ pip-sync requirements/*.txt
 ```
 ---
 ### 5.- Creamos el Proyecto
+***
 ```
 django-admin startproject config .
 ```
-***
 _Configuración por entornos_
+***
 config/ \
 └── settings/ \
 ├── __init__.py \
