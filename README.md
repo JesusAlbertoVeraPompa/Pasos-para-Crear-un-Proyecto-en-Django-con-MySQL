@@ -218,10 +218,10 @@ DEBUG=True
 ### 7.- Creamos las Apps (Carpeta Principal)
 _Ejemplo_
 ```
-python manage.py startapp users
+python manage.py startapp usuarios apps/usuarios
 ```
 ```
-python manage.py startapp products
+python manage.py startapp productos apps/productos
 ```
 ### 8.- Reorganizamos las Carpetas del Proyecto
 <pre>
