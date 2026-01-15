@@ -51,7 +51,7 @@ _Instalamos las Dependencias_
 pip-sync
 ```
 ---
-_Importante Recordar_
+_Importante Recordar_ \
 Editas requirements.in
 ```
 requests
