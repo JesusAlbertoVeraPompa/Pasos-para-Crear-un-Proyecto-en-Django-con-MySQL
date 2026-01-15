@@ -137,3 +137,61 @@ Sincronizamos
 pip-sync requirements/*.txt
 ```
 ---
+### 5.- Creamos el Proyecto
+```
+django-admin startproject config .
+```
+_Configuración por entornos_
+##### config/
+##### └── settings/
+#####     ├── __init__.py
+#####     ├── base.py
+#####     ├── dev.py
+#####     └── prod.py
+---
+```
+settings
+```
+---
+```
+__init__.py
+```
+```
+base.py
+```
+_base.py_
+```
+INSTALLED_APPS = [
+    "django.contrib.admin",
+    "django.contrib.auth",
+    ...
+]
+
+MIDDLEWARE = [
+    "django.middleware.security.SecurityMiddleware",
+    ...
+]
+```
+---
+```
+dev.py
+```
+_dev.py_
+```
+from .base import *
+
+DEBUG = True
+ALLOWED_HOSTS = []
+```
+---
+```
+prod.py
+```
+_prod.py_
+```
+from .base import *
+
+DEBUG = False
+ALLOWED_HOSTS = ["tudominio.com"]
+```
+---
