@@ -1,17 +1,17 @@
 # Pasos para Crear un Proyecto en Django con MySQL
 
-## 1.- Creamos a Carpeta donde trabajaremos el Proyecto
+### 1.- Creamos a Carpeta donde trabajaremos el Proyecto
 
-## 2.- Creamos el Entorno Virtual Local en Windows (Carpeta Principal)
+### 2.- Creamos el Entorno Virtual Local en Windows (Carpeta Principal)
 _Importante tener instalado Python 3.12.10_
 ```
 python -m venv venv
 ```
-## 3.- Activamos el Entorno Virtual Local en Windows (Carpeta Principal)
+### 3.- Activamos el Entorno Virtual Local en Windows (Carpeta Principal)
 ```
 venv\Scripts\activate
 ```
-## 4.- Instalamos el Gestor de Dependencias pip-tools (Carpeta Principal)
+### 4.- Instalamos el Gestor de Dependencias pip-tools (Carpeta Principal)
 ```
 pip install pip-tools
 ```
@@ -21,10 +21,10 @@ pip-compile --version
 ```
 _Creamos la carpeta requirements y agregamos los .in con las Dependencias (Carpeta Principal)_
 ---
-#### requirements/
-#### ├── base.in
-#### ├── dev.in
-#### └── prod.in
+##### requirements/
+##### ├── base.in
+##### ├── dev.in
+##### └── prod.in
 ---
 ```
 requirements
