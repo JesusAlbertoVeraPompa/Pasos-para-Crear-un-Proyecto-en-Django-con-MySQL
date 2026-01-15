@@ -215,20 +215,11 @@ ALLOWED_HOSTS = ["tudominio.com"]
 SECRET_KEY=super-secret-key
 DEBUG=True
 ```
-### 7.- Creamos las Apps (Carpeta Principal)
-_Ejemplo_
-```
-python manage.py startapp usuarios apps/usuarios
-```
-```
-python manage.py startapp productos apps/productos
-```
-### 8.- Reorganizamos las Carpetas del Proyecto
+### 7.- Reorganizamos las Carpetas del Proyecto
 <pre>
 Principal
       ├── apps/
-      │      ├── users/
-      │      └── products/
+      │      ├── app/
       ├── config/
       │      └── settings/
       ├── logs/
@@ -243,3 +234,11 @@ Principal
       ├── manage.py
       └── README.md
 </pre>   
+### 8.- Creamos las Apps (Carpeta Principal)
+_Ejemplo_
+```
+python manage.py startapp usuarios apps/usuarios
+```
+```
+python manage.py startapp productos apps/productos
+```
