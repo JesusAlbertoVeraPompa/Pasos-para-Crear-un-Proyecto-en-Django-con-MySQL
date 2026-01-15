@@ -3,7 +3,7 @@
 ### 1.- Creamos a Carpeta donde trabajaremos el Proyecto
 
 ### 2.- Creamos el Entorno Virtual Local en Windows (Carpeta Principal)
-_Importante tener instalado Python 3.12.10_
+_Importante tener instalado Python 3.12.10 por defecto_
 ```
 python -m venv venv
 ```
