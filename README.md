@@ -21,6 +21,9 @@ pip-compile --version
 ```
 ## 5.- Creamos el archivo (requirements.in) (Carpeta Principal)
 ```
+requirements.in
+```
+```
 # Framework principal
 django==3.2.25
 
