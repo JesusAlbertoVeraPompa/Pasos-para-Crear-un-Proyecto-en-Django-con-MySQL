@@ -28,15 +28,11 @@ pip-compile --version
 
 _Creamos la carpeta requirements y agregamos los .in con las Dependencias (Carpeta Principal)_
 
-##### requirements/
-##### ├── base.in
-##### ├── dev.in
-##### └── prod.in
-
 <pre>
-hello, this is
-   just an     example
-....
+requirements/
+   ├── base.in
+   ├── dev.in
+   └── prod.in
 </pre>
 ```
 requirements
@@ -155,13 +151,15 @@ django-admin startproject config .
 ```
 
 _Configuración por entornos_
+<pre>
+config/
+   └── settings/
+         ├── __init__.py
+         ├── base.py
+         ├── dev.py
+         └── prod.py
+</pre>
 
-##### config/ \
-##### └── settings/ \
-#####     ├── __init__.py \
-#####     ├── base.py \
-#####     ├── dev.py \
-#####     └── prod.py \
 ---
 ```
 settings
