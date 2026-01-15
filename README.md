@@ -207,3 +207,39 @@ DEBUG = False
 ALLOWED_HOSTS = ["tudominio.com"]
 ```
 ---
+### 6.- Creamos las Variables de Entorno (Carpeta Principal)
+```
+.env
+```
+```
+SECRET_KEY=super-secret-key
+DEBUG=True
+```
+### 7.- Creamos las Apps (Carpeta Principal)
+_Ejemplo_
+```
+python manage.py startapp users
+```
+```
+python manage.py startapp products
+```
+### 8.- Reorganizamos las Carpetas del Proyecto
+<pre>
+Principal
+      ├── apps/
+      │      ├── users/
+      │      └── products/
+      ├── config/
+      │      └── settings/
+      ├── logs/
+      │      └── error.log
+      ├── media/
+      ├── requirements/
+      ├── services/
+      ├── static/
+      ├── utils/
+      ├── venv/
+      ├── .env
+      ├── manage.py
+      └── README.md
+</pre>   
