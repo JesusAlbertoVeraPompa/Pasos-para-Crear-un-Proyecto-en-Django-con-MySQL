@@ -19,18 +19,28 @@ _Verificamos_
 ```
 pip-compile --version
 ```
-_Creamos el archivo requirements.in con las Dependencias (Carpeta Principal)_
+_Creamos la carpeta requirements y agregamos los .in con las Dependencias (Carpeta Principal)_
+---
+requirements/
+├── base.in
+├── dev.in
+└── prod.in
+---
 ```
-requirements.in
+requirements
 ```
 ```
-# Framework principal
+base.in
+```
+_base.in_
+```
+# Core Django / Framework base
 django==3.2.25
 
-# REST API
+# Django REST Framework / APIs
 djangorestframework==3.15.1
 
-# Variables de entorno
+# Variables de entorno / Settings seguros
 django-environ
 
 # Biblioteca de bases de datos MySQL
@@ -39,29 +49,87 @@ mysqlclient
 # JSON Web Tokens (JWT)
 djangorestframework-simplejwt
 
-# Cross-Origin Resource Sharing (CORS)
+# Filtros para DRF / Filtros en APIs
+django-filter
+
+# Manejo de fechas / zonas horarias
+pytz
+```
+```
+dev.in
+```
+_dev.in_
+```
+-r base.in
+
+# Debug / Ver SQL, cache, performance
+django-debug-toolbar
+
+# Testing / Testing moderno
+pytest
+pytest-django
+factory-boy
+faker
+
+# Linting / calidad
+black
+flake8
+isort
+
+# Utilidades
+ipython
+```
+```
+prod.in
+```
+_prod.in_
+```
+-r base.in
+
+# Servidor WSGI / Servidor de producción
+gunicorn
+
+# Seguridad / headers / APIs públicas
 django-cors-headers
+
+# Cache / performance
+redis
+
+# Static files
+whitenoise
+
+# Monitoreo de errores
+sentry-sdk
 ```
-_Compilamos las Dependencias_
+_Compilamos las Dependencias segun la Necesidad_
 ```
-pip-compile
+pip-compile requirements/base.in
 ```
-_Instalamos las Dependencias_
 ```
-pip-sync
+pip-compile requirements/dev.in
+```
+```
+pip-compile requirements/prod.in
+```
+_Instalamos las Dependencias segun la Necesidad_
+```
+pip-sync requirements/base.txt
+```
+```
+pip-sync requirements/dev.txt
+```
+```
+pip-sync requirements/prod.txt
 ```
 ---
 _Importante Recordar_ \
-Editas requirements.in
-```
-requests
-```
+Editas requirements\ *.in \
 Compilamos
 ```
-pip-compile
+pip-compile requirements/*.in
 ```
 Sincronizamos
 ```
-pip-sync
+pip-sync requirements/*.txt
 ```
 ---
