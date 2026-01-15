@@ -21,14 +21,15 @@ pip-compile --version
 ```
 _Creamos la carpeta requirements y agregamos los .in con las Dependencias (Carpeta Principal)_
 ---
-requirements/
-├── base.in
-├── dev.in
-└── prod.in
+requirements/ \
+├── base.in  \
+├── dev.in  \
+└── prod.in  \
 ---
 ```
 requirements
 ```
+---
 ```
 base.in
 ```
@@ -55,6 +56,7 @@ django-filter
 # Manejo de fechas / zonas horarias
 pytz
 ```
+---
 ```
 dev.in
 ```
@@ -79,6 +81,7 @@ isort
 # Utilidades
 ipython
 ```
+---
 ```
 prod.in
 ```
@@ -101,6 +104,7 @@ whitenoise
 # Monitoreo de errores
 sentry-sdk
 ```
+---
 _Compilamos las Dependencias segun la Necesidad_
 ```
 pip-compile requirements/base.in
@@ -123,7 +127,7 @@ pip-sync requirements/prod.txt
 ```
 ---
 _Importante Recordar_ \
-Editas requirements\ *.in \
+Editas cualquier requirements\ *.in \
 Compilamos
 ```
 pip-compile requirements/*.in
