@@ -142,12 +142,12 @@ pip-sync requirements/*.txt
 django-admin startproject config .
 ```
 _Configuración por entornos_
-config/
-   └── settings/
-          ├── __init__.py
-          ├── base.py
-          ├── dev.py
-          └── prod.py
+###### config/
+######    └── settings/
+######           ├── __init__.py
+######           ├── base.py
+######           ├── dev.py
+######           └── prod.py
 ---
 ```
 settings
