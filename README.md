@@ -6,7 +6,7 @@
 
 _Importante tener instalado Python 3.12.10 por defecto_
 ```
-python -m venv venv
+python -m venv venv --without-pip
 ```
 
 ### 3.- Activamos el Entorno Virtual Local en Windows (Carpeta Principal)
