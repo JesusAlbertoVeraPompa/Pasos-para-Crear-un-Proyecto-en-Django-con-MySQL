@@ -36,9 +36,7 @@ _Creamos la carpeta requirements y agregamos los .in con las Dependencias (Carpe
 
 <pre>
 requirements/
-   ├── base.in
-   ├── dev.in
-   └── prod.in
+   └── base.in
 </pre>
 ```
 requirements
@@ -71,73 +69,13 @@ django-filter
 pytz
 ```
 ---
-```
-dev.in
-```
-_dev.in_
-```
--r base.in
-
-# Debug / Ver SQL, cache, performance
-django-debug-toolbar
-
-# Testing / Testing moderno
-pytest
-pytest-django
-factory-boy
-faker
-
-# Linting / calidad
-black
-flake8
-isort
-
-# Utilidades
-ipython
-```
----
-```
-prod.in
-```
-_prod.in_
-```
--r base.in
-
-# Servidor WSGI / Servidor de producción
-gunicorn
-
-# Seguridad / headers / APIs públicas
-django-cors-headers
-
-# Cache / performance
-redis
-
-# Static files
-whitenoise
-
-# Monitoreo de errores
-sentry-sdk
-```
----
 _Compilamos las Dependencias segun la Necesidad_
 ```
 pip-compile requirements/base.in
 ```
-```
-pip-compile requirements/dev.in
-```
-```
-pip-compile requirements/prod.in
-```
 _Instalamos las Dependencias segun la Necesidad_
 ```
 pip-sync requirements/base.txt
-```
-```
-pip-sync requirements/dev.txt
-```
-```
-pip-sync requirements/prod.txt
 ```
 ---
 _Importante Recordar_ \
