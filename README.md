@@ -1,6 +1,12 @@
 # Pasos para Crear un Proyecto en Django con MySQL
 
 ### 1.- Creamos a Carpeta donde trabajaremos el Proyecto
+```
+mkdir nombre-carpeta
+```
+```
+cd nombre-carpeta
+```
 
 ### 2.- Creamos el Entorno Virtual Local en Windows (Carpeta Principal)
 
