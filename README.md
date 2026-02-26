@@ -1,5 +1,6 @@
 # Pasos para Crear un Proyecto en Django con MySQL
 
+
 ### 1.- Creamos a Carpeta donde trabajaremos el Proyecto
 ```
 mkdir nombre-carpeta
@@ -8,6 +9,7 @@ mkdir nombre-carpeta
 cd nombre-carpeta
 ```
 
+
 ### 2.- Creamos el Entorno Virtual Local en Windows (Carpeta Principal)
 
 _Importante tener instalado Python 3.12.10 por defecto_
@@ -15,11 +17,13 @@ _Importante tener instalado Python 3.12.10 por defecto_
 python -m venv venv
 ```
 
+
 ### 3.- Activamos el Entorno Virtual Local en Windows (Carpeta Principal)
 
 ```
 venv\Scripts\activate
 ```
+
 
 ### 4.- Instalamos el Gestor de Dependencias pip-tools (Carpeta Principal)
 
@@ -41,7 +45,6 @@ requirements/
 ```
 requirements
 ```
----
 ```
 base.in
 ```
@@ -85,37 +88,30 @@ whitenoise
 ---
 _Compilamos las Dependencias segun la Necesidad_
 ```
-pip-compile requirements/base.in
+pip-compile -v requirements/base.in
 ```
 _Instalamos las Dependencias segun la Necesidad_
 ```
-pip-sync requirements/base.txt
+pip-sync -v requirements/base.txt
 ```
 
 ---
-### 5.- Creamos el Proyecto
+### 5.- Creamos el Proyecto y Configuramos el settings.py
 ```
 django-admin startproject config .
 ```
+---
+```
+# config/settings.py
 
----
-```
-settings
-```
----
-```
-__init__.py
-```
-```
-base.py
-```
-_base.py_
-```
 import os
 import sys
 import environ
 from pathlib import Path
+from dotenv import load_dotenv
 from datetime import timedelta
+
+load_dotenv()
 
 # ========================================================================
 # BASE
@@ -123,24 +119,39 @@ from datetime import timedelta
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-env = environ.Env(
-    DEBUG=(bool, False)
-)
+env = environ.Env(DEBUG=(bool, False))
 
 environ.Env.read_env(BASE_DIR / ".env")
 
 # ========================================================================
 # SECURITY
 # ========================================================================
-
 SECRET_KEY = env("SECRET_KEY")
 DEBUG = env("DEBUG")
-IS_TESTING = "test" in sys.argv
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env("ALLOWED_HOSTS").split(",")
 
 # ========================================================================
 # APPLICATIONS
 # ========================================================================
+INSTALLED_APPS = [
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "rest_framework",
+    "django_filters",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
+    "allauth.socialaccount.providers.facebook",
+    "apps.accounts",
+    "apps.users",
+    "apps.core",
+]
+
 
 DJANGO_APPS = [
     "django.contrib.admin",
@@ -150,23 +161,28 @@ DJANGO_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "corsheaders",
-    'drf_spectacular',
+    "drf_spectacular",
 ]
 
 THIRD_PARTY_APPS = [
     "rest_framework",
     "django_filters",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
+    "allauth.socialaccount.providers.facebook",
 ]
 
 LOCAL_APPS = [
-    "apps.usuarios",
-    "apps.control_asistencia",
-    "apps.pago_proveedores",
-    "apps.tareas",
-    "rest_framework_simplejwt.token_blacklist",
+    "apps.accounts",
+    "apps.users",
+    "apps.core",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+
+AUTH_USER_MODEL = "accounts.User"
 
 # ========================================================================
 # MIDDLEWARE
@@ -238,7 +254,7 @@ DATABASES = {
 }
 
 # ========================================================================
-# AUTH
+# AUTH / PASSWORD VALIDATION / REST_FRAMEWORK
 # ========================================================================
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -248,10 +264,28 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
-# ========================================================================
-# I18N
-# ========================================================================
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    "EXCEPTION_HANDLER": "config.exceptions.custom_exception_handler",
+    "DEFAULT_THROTTLE_CLASSES": [
+        "rest_framework.throttling.AnonRateThrottle",
+        "rest_framework.throttling.UserRateThrottle",
+    ],
+    "DEFAULT_THROTTLE_RATES": {
+        "anon": "5/min",
+        "user": "20/min",
+        "login": "5/min",
+        "password_change": "5/hour",
+    },
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
 
+# ========================================================================
+# I18N / TIMEZONE
+# ========================================================================
 LANGUAGE_CODE = "es-es"
 TIME_ZONE = 'America/Bogota'
 USE_I18N = True
@@ -267,7 +301,38 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+# ========================================================================
+# SIMPLE_JWT
+# ========================================================================
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": True,
+    "AUTH_HEADER_TYPES": ("Bearer",),
+}
+
+# ========================================================================
+# EMAIL
+# ========================================================================
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+
+
+# ========================================================================
+# AUTH - GOOGLE FACEBOOK
+# ========================================================================
+GOOGLE_CLIENT_ID = env("GOOGLE_CLIENT_ID")
+GOOGLE_SECRET = env("GOOGLE_SECRET")
+FACEBOOK_APP_ID = env("FACEBOOK_APP_ID")
+FACEBOOK_SECRET = env("FACEBOOK_SECRET")
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 ```
 ---
@@ -276,8 +341,41 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 .env
 ```
 ```
-SECRET_KEY=super-secret-key
+# .env
+
+# ========================================================================
+# SECRET_KEY
+# ========================================================================
+SECRET_KEY=
+
+# ========================================================================
+# DEBUG AND ALLOWED_HOSTS
+# ========================================================================
 DEBUG=True
+ALLOWED_HOSTS=localhost,
+
+# ========================================================================
+# EMAIL
+# ========================================================================
+EMAIL_HOST_USER=
+EMAIL_HOST_PASSWORD=
+
+# ========================================================================
+# BASE DE DATOS
+# ========================================================================
+MYSQL_DATABASE=
+MYSQL_USER=
+MYSQL_PASSWORD=
+MYSQL_HOST=
+MYSQL_PORT=
+
+# ========================================================================
+# AUTH - GOOGLE FACEBOOK
+# ========================================================================
+GOOGLE_CLIENT_ID=
+GOOGLE_SECRET=
+FACEBOOK_APP_ID=
+FACEBOOK_SECRET=
 ```
 ### 7.- Reorganizamos las Carpetas del Proyecto
 <pre>
