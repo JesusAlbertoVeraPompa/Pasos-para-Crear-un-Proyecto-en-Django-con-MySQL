@@ -53,7 +53,7 @@ _base.in_
 django==3.2.25
 
 # Django REST Framework / APIs
-djangorestframework==3.15.1
+djangorestframework>=3.14.0,<3.15.0
 
 # Variables de entorno / Settings seguros
 django-environ
@@ -62,16 +62,22 @@ django-environ
 mysqlclient
 
 # JSON Web Tokens (JWT)
-djangorestframework-simplejwt
+djangorestframework-simplejwt<5.3.0
+
+# Manejo de CORS (Permite que el Frontend se conecte a la API)
+django-cors-headers
+
+# Documentación de la API (Swagger/OpenAPI)
+drf-spectacular
 
 # Filtros para DRF / Filtros en APIs
-django-filter
+django-filter<24.0
 
 # Manejo de fechas / zonas horarias
 pytz
 
 # Gestión de Usuarios
-django-allauth
+django-allauth<0.60.0
 
 # Carga Variables de Entorno desde .env
 python-dotenv
@@ -133,26 +139,6 @@ ALLOWED_HOSTS = env("ALLOWED_HOSTS").split(",")
 # ========================================================================
 # APPLICATIONS
 # ========================================================================
-INSTALLED_APPS = [
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
-    "rest_framework",
-    "django_filters",
-    "allauth",
-    "allauth.account",
-    "allauth.socialaccount",
-    "allauth.socialaccount.providers.google",
-    "allauth.socialaccount.providers.facebook",
-    "apps.accounts",
-    "apps.users",
-    "apps.core",
-]
-
-
 DJANGO_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -167,22 +153,22 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     "rest_framework",
     "django_filters",
-    "allauth",
-    "allauth.account",
-    "allauth.socialaccount",
-    "allauth.socialaccount.providers.google",
-    "allauth.socialaccount.providers.facebook",
+    #"allauth",
+    #"allauth.account",
+    #"allauth.socialaccount",
+    #"allauth.socialaccount.providers.google",
+    #"allauth.socialaccount.providers.facebook",
 ]
 
 LOCAL_APPS = [
-    "apps.accounts",
-    "apps.users",
-    "apps.core",
+    #"apps.accounts",
+    #"apps.users",
+    #"apps.core",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
-AUTH_USER_MODEL = "accounts.User"
+#AUTH_USER_MODEL = "accounts.User"
 
 # ========================================================================
 # MIDDLEWARE
