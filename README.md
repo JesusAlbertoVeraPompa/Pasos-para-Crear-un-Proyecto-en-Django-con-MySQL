@@ -47,7 +47,6 @@ base.in
 ```
 _base.in_
 ```
-# Core Django / Framework base
 django==3.2.25
 
 # Django REST Framework / APIs
@@ -67,6 +66,21 @@ django-filter
 
 # Manejo de fechas / zonas horarias
 pytz
+
+# Gestión de Usuarios
+django-allauth
+
+# Carga Variables de Entorno desde .env
+python-dotenv
+
+# Pruebas Automatizadas para Python
+pytest
+
+# Complemento de pytest para Django
+pytest-django
+
+# Archivos Estáticos
+whitenoise
 ```
 ---
 _Compilamos las Dependencias segun la Necesidad_
@@ -77,32 +91,12 @@ _Instalamos las Dependencias segun la Necesidad_
 ```
 pip-sync requirements/base.txt
 ```
----
-_Importante Recordar_ \
-Editas cualquier requirements\ *.in \
-Compilamos
-```
-pip-compile requirements/*.in
-```
-Sincronizamos
-```
-pip-sync requirements/*.txt
-```
+
 ---
 ### 5.- Creamos el Proyecto
 ```
 django-admin startproject config .
 ```
-
-_Configuración del settings por entornos_
-<pre>
-config/
-   └── settings/
-         ├── __init__.py
-         ├── base.py
-         ├── dev.py
-         └── prod.py
-</pre>
 
 ---
 ```
@@ -275,28 +269,6 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-```
----
-```
-dev.py
-```
-_dev.py_
-```
-from .base import *
-
-DEBUG = True
-ALLOWED_HOSTS = []
-```
----
-```
-prod.py
-```
-_prod.py_
-```
-from .base import *
-
-DEBUG = False
-ALLOWED_HOSTS = ["tudominio.com"]
 ```
 ---
 ### 6.- Creamos las Variables de Entorno (Carpeta Principal)
